@@ -16,7 +16,7 @@ export default class Landing extends Component {
                     
                       <Link to="/register" class="btn btn-primary" >Register</Link>
               
-                      <Link to="/login" class="btn btn-primary">Login</Link>
+                      <Link to="/login" class="btn btn-white">Login</Link>
           
                     </div>
                 </div>
