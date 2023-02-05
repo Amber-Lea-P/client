@@ -4,7 +4,13 @@ export default class Register extends Component {
   constructor() {
     super(); // super method: it is telling us to call the base class constructor located within the Component
     console.log("hello from register");
-    this.state = { name: "", email: "", password: "", confirmPassword: "" };
+    this.state = { 
+      name: "", 
+      email: "", 
+      password: "", 
+      confirmPassword: "", 
+      errors: {}, 
+    };
   }
   //e : event which will help us to get the data
   onChange = (e) => {
@@ -18,7 +24,18 @@ export default class Register extends Component {
     axios.
       post("/api/users", this.state)
       .then((res) => console.log(JSON.stringify(res)))
-      .catch((err) => console.error(JSON.stringify(err)));
+
+      .catch((err) => {
+        const errorObj = {}
+        console.error(JSON.stringify(err.response.data.errors));
+        err.response.data.errors.forEach
+        ((element) => {
+          console.log({ msg: element.msg, field: element.param });
+          if (element.param == "email") errorObj.email = element.msg;
+          if (element.param == "password") errorObj.passowrd = element.msg;
+        });
+        this.setState({errors:errorObj});
+      });
     console.log("hello from register form");
   };
   // to handle submition of form. 
