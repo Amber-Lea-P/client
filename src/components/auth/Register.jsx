@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import classnames from "classnames";
 export default class Register extends Component {
   constructor() {
     super(); // super method: it is telling us to call the base class constructor located within the Component
@@ -32,7 +33,7 @@ export default class Register extends Component {
         ((element) => {
           console.log({ msg: element.msg, field: element.param });
           if (element.param == "email") errorObj.email = element.msg;
-          if (element.param == "password") errorObj.passowrd = element.msg;
+          if (element.param == "password") errorObj.password = element.msg;
         });
         this.setState({errors:errorObj});
       });
@@ -66,8 +67,13 @@ export default class Register extends Component {
           placeholder="Email Address" 
           name="email" 
           value = {email} 
-          onChange={this.onChange} />
-
+          onChange={this.onChange}
+          className={classnames
+          ("form-control form-control-lg",
+          {
+            "is-invalid": this.state.errors && this.state.errors.email, })}
+           />
+        <div className="d-block invalid-feedback">{this.state.errors.email}</div>
           <small class="form-text"
             >This site uses Gravatar so if you want a profile image, use a
             Gravatar email</small>
@@ -81,7 +87,15 @@ export default class Register extends Component {
             minLength="6"
             value = {password}
             onChange={this.onChange}
-          />
+            className={classnames
+              ("form-control form-control-lg",
+            {
+              "is-invalid": this.state.errors && this.state.errors.password, 
+            })}
+            />
+            <div className="d-block invalid-feedback">
+            {this.state.errors.password}
+            </div>
         </div>
 
         <div class="form-group">
