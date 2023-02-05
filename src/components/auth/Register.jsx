@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import axios from "axios";
 export default class Register extends Component {
   constructor() {
     super(); // super method: it is telling us to call the base class constructor located within the Component
@@ -15,6 +15,10 @@ export default class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(this.state));
+    axios.
+      post("/api/users", this.state)
+      .then((res) => console.log(JSON.stringify(res)))
+      .catch((err) => console.error(JSON.stringify(err)));
     console.log("hello from register form");
   };
   // to handle submition of form. 
