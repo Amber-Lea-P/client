@@ -1,5 +1,7 @@
 //shorcut rafce
 import React, { useState } from 'react'
+import axios from "axios"; 
+
 const initialState = { 
     name: "", 
     email: "", 
@@ -10,10 +12,13 @@ const initialState = {
 const Register2 = () => {
     const [formData, setFromData] = useState(initialState)
 
+    const {name, email, password, confirmPassword} = formData;
+    // destructuring of the state object.
+
     const [error, setError] = useState({});
     // to hold the error related messages from the rest api call. 
 
-    onChange = (e) => {
+ const onChange = (e) => {
         setFromData({ ...formData, [e.target.name] : e.target.value });
         //...formData : spread operator.
 
@@ -21,9 +26,9 @@ const Register2 = () => {
      
       };
       // to handle the change event for input tags
-    onSubmit = (e) => {
+ const onSubmit = (e) => {
         e.preventDefault();
-        console.log(JSON.stringify(this.state));
+        console.log(JSON.stringify(formData));
         axios.
           post("/api/users", this.state)
           .then((res) => console.log(JSON.stringify(res)))
