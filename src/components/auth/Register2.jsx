@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import classnames from "classnames";
-
 const initialState = {
-  name: "Abhi",
+  name: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -25,22 +24,28 @@ const Register2 = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(formData));
-    axios
-      .post("/api/users", { name, email, password })
-      .then((res) => console.log(JSON.stringify(res)))
-      .catch((err) => {
-        const errorObj = {};
-        console.error(JSON.stringify(err.response.data.errors));
-        err.response.data.errors.forEach((element) => {
-          console.log({ msg: element.msg, field: element.param });
-          if (element.param == "email") errorObj.email = element.msg;
-          if (element.param == "password") errorObj.password = element.msg;
+    if (password === confirmPassword) {
+      console.log(JSON.stringify(formData));
+      axios
+        .post("/api/users", { name, email, password })
+        .then((res) => console.log(JSON.stringify(res)))
+        .catch((err) => {
+          const errorObj = {};
+          console.error(JSON.stringify(err.response.data.errors));
+          err.response.data.errors.forEach((element) => {
+            console.log({ msg: element.msg, field: element.param });
+            if (element.param == "email") errorObj.email = element.msg;
+            if (element.param == "password") errorObj.password = element.msg;
+          });
+          setError({ ...errorObj });
+          //this.setState({ errors: errorObj });
         });
-        setError({ ...errorObj });
-        //this.setState({ errors: errorObj });
-      });
-    console.log("hello from register form");
+      console.log("hello from register form");
+    } else {
+      const errorObj = {};
+      errorObj.confirmPassword = "password did not match";
+      setError({ ...errorObj });
+    }
   };
   return (
     <>
@@ -100,6 +105,9 @@ const Register2 = () => {
               value={confirmPassword}
               onChange={onChange}
             />
+            <div className="d-block invalid-feedback">
+              {error.confirmPassword}
+            </div>
           </div>
           <input type="submit" class="btn btn-primary" value="Register" />
         </form>

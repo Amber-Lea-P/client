@@ -7,17 +7,18 @@
         //to create a class based component we have to fire a command called rcc
 // 2. function based components
 // 3. pure components
+import React from 'react'
 
-import React, { Component } from 'react'
-
-export default class Footer extends Component {
-  render() {
-    return (
-      <h5>&copy;www.knowledgehut.com {new Date ().getFullYear()}</h5>
-    )
-  }
+const Footer = () => {
+  return (
+    <h5>&copy;www.knowledgehut.com {new Date ().getFullYear()}</h5>
+  )
 }
 
+export default Footer
+
+      
+    
 //export: can inform to the JS that Footer calas can be accessedby other pages/moduels from client application. 
 //Default: it will use the component name as a default export name
 //class: it wil be a template to declare the code/stuff
