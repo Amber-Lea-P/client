@@ -50,7 +50,7 @@ const Register2 = () => {
   return (
     <>
       <section class="container">
-        <h1 class="large text-primary">Sign Up</h1>
+        <h1 class="large text-primary">Sign Up for Devconnector</h1>
         <p class="lead">
           <i class="fas fa-user"></i> Create Your Account
         </p>

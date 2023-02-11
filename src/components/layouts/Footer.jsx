@@ -9,9 +9,9 @@
 // 3. pure components
 import React from 'react'
 
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <h5>&copy;www.knowledgehut.com {new Date ().getFullYear()}</h5>
+    <h5>&copy;www.knowledgehut.com {props.appName}{new Date ().getFullYear()}</h5>
   );
 };
 

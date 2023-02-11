@@ -9,12 +9,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 
 function App() {
+  const appName = "UpgradeConnector";
   return (
     <>
     <Router>
-    <Header></Header>
+    <Header appName={appName}></Header>
     <Routers></Routers>
-    <Footer></Footer>
+    <Footer appName={appName}></Footer>
     </Router>
     </>
   );
