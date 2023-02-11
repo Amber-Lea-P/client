@@ -12,8 +12,8 @@ import React from 'react'
 const Footer = () => {
   return (
     <h5>&copy;www.knowledgehut.com {new Date ().getFullYear()}</h5>
-  )
-}
+  );
+};
 
 export default Footer
 
