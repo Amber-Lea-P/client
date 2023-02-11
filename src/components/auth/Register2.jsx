@@ -1,9 +1,49 @@
 //shorcut rafce
 import React, { useState } from 'react'
-const initialState = {};
+const initialState = { 
+    name: "", 
+    email: "", 
+    password: "", 
+    confirmPassword: "",
+};
 
 const Register2 = () => {
     const [formData, setFromData] = useState(initialState)
+
+    const [error, setError] = useState({});
+    // to hold the error related messages from the rest api call. 
+
+    onChange = (e) => {
+        setFromData({ ...formData, [e.target.name] : e.target.value });
+        //...formData : spread operator.
+
+        //this.setState({[e.target.name]: e.target.value}); 
+     
+      };
+      // to handle the change event for input tags
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log(JSON.stringify(this.state));
+        axios.
+          post("/api/users", this.state)
+          .then((res) => console.log(JSON.stringify(res)))
+    
+          .catch((err) => {
+            const errorObj = {}
+            console.error(JSON.stringify(err.response.data.errors));
+            err.response.data.errors.forEach
+            ((element) => {
+              console.log({ msg: element.msg, field: element.param });
+              if (element.param == "email") errorObj.email = element.msg;
+              if (element.param == "password") errorObj.password = element.msg;
+            });
+            this.setState({errors:errorObj});
+          });
+        console.log("hello from register form");
+      };
+      // to handle submition of form. 
+    
+
   return (     
   <>
     <section class="container"> 
@@ -18,7 +58,7 @@ const Register2 = () => {
             name="name" 
             value ={name} 
             required 
-            onChange={this.onChange}/>
+            onChange={onChange}/>
         </div>
 
         <div class="form-group">
@@ -27,7 +67,7 @@ const Register2 = () => {
             placeholder="Email Address" 
             name="email" 
             value = {email} 
-            onChange={this.onChange}
+            onChange={onChange}
             className={classnames
             ("form-control form-control-lg",
             {
@@ -46,7 +86,7 @@ const Register2 = () => {
             name="password"
             minLength="6"
             value = {password}
-            onChange={this.onChange}
+            onChange={onChange}
             className={classnames
                 ("form-control form-control-lg",
             {
@@ -65,7 +105,7 @@ const Register2 = () => {
                 name="password2"
                 minLength="6"
                 value={confirmPassword}
-                onChange={this.onChange}
+                onChange={onChange}
                 />
         </div>
 
