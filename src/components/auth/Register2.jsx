@@ -100,7 +100,7 @@ const Register2 = () => {
             <input
               type="password"
               placeholder="Confirm Password"
-              name="password2"
+              name="confirmPassword"
               minLength="6"
               value={confirmPassword}
               onChange={onChange}
