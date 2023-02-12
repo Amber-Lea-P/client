@@ -6,17 +6,21 @@ import Footer from './components/layouts/Footer';
 import { Routers } from './components/routers/Routers';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
+// redux import statements
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   const appName = "UpgradeConnector";
   return (
     <>
-    <Router>
-    <Header appName={appName}></Header>
-    <Routers></Routers>
-    <Footer appName={appName}></Footer>
-    </Router>
+    <Provider store={store}>
+      <Router>
+      <Header appName={appName}></Header>
+      <Routers></Routers>
+      <Footer appName={appName}></Footer>
+      </Router>
+    </Provider>
     </>
   );
 }
