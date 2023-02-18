@@ -1,8 +1,9 @@
 //rootreducer : its going to hold all reducer details at one place
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
+import authReducer from "./authReducer";
 
 const rootReducers = combineReducers({
-  example: () => [],
+  authReducer,
 });
 
 export default rootReducers;
