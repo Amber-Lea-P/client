@@ -18,7 +18,13 @@ export default (state = initialState, action) => {
     return { ...state }
     case REGISTER_SUCCESS:
         // to handle the success part of user registration//it will give us the token.
-        return { ...state }
+        // isaAuthenticated : true 
+        // loading : false
+        // token: we need to use the token from dashboard onwards.
+        //for create profile / add exp / add education etc. 
+        localStorage.setItem("token", payload.token);
+        //localStorage will help us to hold the token in persited way.
+        return { ...state, ...payload, isAuthenticated: true, loading: false };
 
   default:
     return state
