@@ -7,8 +7,10 @@ import { connect } from "react-redux";
 
 // action import
 import { register } from "../../redux/actions/authAction";
+import { Navigate } from "react-router";
+
 const initialState = {
-  name: "Abhi",
+  name: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -32,6 +34,12 @@ export const Register2 = ({ isAuthenticated, register }) => {
 
     //this.setState({ [e.target.name]: e.target.value });
   };
+
+if(isAuthenticated) {
+  return <Navigate to="/dashboard"></Navigate>
+}
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {

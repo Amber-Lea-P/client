@@ -1,4 +1,4 @@
-import {USER_LOADED,REGISTER_SUCCESS  } from "../types";
+import {USER_LOADED,REGISTER_SUCCESS, REGISTER_FAIL  } from "../types";
 
 // it is used to hold and manipulate the user related states in store. 
 // all auth related operations / user related operations like register, lofin,  loading current user info. etc. 
@@ -25,6 +25,7 @@ export default (state = initialState, action) => {
         localStorage.setItem("token", payload.token);
         //localStorage will help us to hold the token in persited way.
         return { ...state, ...payload, isAuthenticated: true, loading: false };
+        
 
   default:
     return state
