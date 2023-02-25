@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import DashboardAction from './DashboardAction'
 
 export const Dashboard = (props) => {
   return (
-    <div>Welcome UserName</div>
+    <div>Welcome UserName
+    <DashboardAction></DashboardAction>
+    </div>
   )
 }
 
