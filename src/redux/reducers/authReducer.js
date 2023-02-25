@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
   switch (type) {
 
   case USER_LOADED:
-    return { ...state }
+    return { ...state, isAuthenticated: true, loading: false, user: payload}
     case REGISTER_SUCCESS:
         // to handle the success part of user registration//it will give us the token.
         // isaAuthenticated : true 

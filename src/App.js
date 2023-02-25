@@ -4,22 +4,38 @@ import Header from './components/layouts/Header';
 import Landing from './components/layouts/Landing';
 import Footer from './components/layouts/Footer';
 import { Routers } from './components/routers/Routers';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // redux import statements
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { useEffect } from 'react';
+import setAuthToken from "./utils/setAuthToken";
+import { loadUser } from './redux/actions/authAction';
+
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(localStorage.token);
+   if(localStorage.token) {
+    setAuthToken(localStorage.token);
+   }
+  else{
+   navigate("/")
+  }
+   store.dispatch( loadUser());
+  }, []); // we are not accessing any props. 
+
   const appName = "UpgradeConnector";
   return (
     <>
     <Provider store={store}>
-      <Router>
+     
       <Header appName={appName}></Header>
       <Routers></Routers>
       <Footer appName={appName}></Footer>
-      </Router>
+      
     </Provider>
     </>
   );
