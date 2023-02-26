@@ -1,28 +1,52 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useMatch, useNavigate } from "react-router";
+import {
+  getCurrentProfile,
+  createProfile,
+} from "../../redux/actions/profileAction";
+import { Link } from "react-router-dom";
 const initialState = {
-    company: '',
-    website: '',
-    location: '',
-    status: '',
-    skills: '',
-    githubusername: '',
-    bio: '',
-    twitter: '',
-    facebook: '',
-    linkedin: '',
-    youtube: '',
-    instagram: ''
-  };
+  company: "",
+  website: "",
+  location: "",
+  status: "",
+  skills: "",
+  githubusername: "",
+  bio: "",
+  twitter: "",
+  facebook: "",
+  linkedin: "",
+  youtube: "",
+  instagram: "",
+};
+export const CreateProfile = ({ profileReducer: { profile, loading } }) => {
+  const [formData, setFormData] = useState(initialState);
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
-export const CreateProfile = ({profileReducer: {profile, loading}}) => {
-    const [formData, setFormData] = useState(initialState);
-    
-    const [displaySocialInputs, setDisplaySocialInputs] = useState(false);
+  const creatingProfile = useMatch("/create-profile");
+  //
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-    
+  const {
+    company,
+    website,
+    location,
+    status,
+    skills,
+    githubusername,
+    bio,
+    twitter,
+    facebook,
+    linkedin,
+    youtube,
+    instagram,
+  } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = (e) => {};
   const socialInput = (
     <>
       <div className="form-group social-input">
@@ -81,6 +105,7 @@ export const CreateProfile = ({profileReducer: {profile, loading}}) => {
       </div>
     </>
   );
+
   return (
     <section className="container">
       <h1 className="large text-primary">
@@ -204,7 +229,15 @@ export const CreateProfile = ({profileReducer: {profile, loading}}) => {
 };
 
 CreateProfile.propTypes = {
-  profileReducer: PropTypes.object.isRequired
+  profileReducer: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  profileReducer: state.profileReducer,
+});
+
+const mapDispatchToProps = { getCurrentProfile, createProfile };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProfile);

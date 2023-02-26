@@ -5,6 +5,7 @@ import Login from "../auth/Login";
 import Register2 from "../auth/Register2";
 import Alert from "../layouts/Alert";
 import Dashboard from "../dashboard/Dashboard";
+import CreateProfile from "../profile/CreateProfile";
 
 export const Routers = () => {
   return (
@@ -15,6 +16,8 @@ export const Routers = () => {
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register2></Register2>}></Route>
         <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
+        <Route path="/create-profile" element={<CreateProfile></CreateProfile>}></Route>
+        <Route path="/edit-profile" element={<CreateProfile></CreateProfile>}></Route>
     </Routes>
   </>
   );

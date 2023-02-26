@@ -1,5 +1,6 @@
 import api from "../../utils/api";
 import { GET_PROFILE, PROFILE_ERROR } from "../types";
+import { setAlert } from "./alertAction";
 
 export const getCurrentProfile = () => async (dispatch) => {
   try {
