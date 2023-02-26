@@ -2,6 +2,22 @@ import api from "../../utils/api";
 import { GET_PROFILE, PROFILE_ERROR } from "../types";
 import { setAlert } from "./alertAction";
 
+export const getProfileById = (userId) => async (dispatch) => {
+  try {
+    const res = await api.get(`/profile/user/${userId}`);
+    dispatch({ type: GET_PROFILE, payload: res.data });
+  
+  }catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.statusCode,
+      },
+    });
+  }
+};
+
 export const getCurrentProfile = () => async (dispatch) => {
   try {
     const res = await api.get("/profile/me");
