@@ -7,6 +7,7 @@ import Alert from "../layouts/Alert";
 import Dashboard from "../dashboard/Dashboard";
 import CreateProfile from "../profile/CreateProfile";
 import Profile from "../profile/Profile";
+import Profiles from "../profiles/Profiles";
 
 export const Routers = () => {
   return (
@@ -20,6 +21,7 @@ export const Routers = () => {
         <Route path="/create-profile" element={<CreateProfile></CreateProfile>}></Route>
         <Route path="/edit-profile" element={<CreateProfile></CreateProfile>}></Route>
         <Route path="/profile/:id" element={<Profile></Profile>}></Route>
+        <Route path="/profiles" element={<Profiles></Profiles>}></Route>
     </Routes>
   </>
   );

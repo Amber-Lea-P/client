@@ -1,19 +1,49 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Spinner from "../layouts/Spinner";
 
-export const Profiles = (props) => {
+import { getProfiles } from "../../redux/actions/profileAction";
+
+const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+  useEffect(() => {
+    getProfiles();
+  }, [getProfiles]);
+
+  const displayProfileItem = profiles.map((profile) => (
+    <ProfileItem key={profile._id} profile={profile} />
+  ));
   return (
-    <div>Profiles</div>
-  )
-}
+    <section className="container">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h1 className="large text-primary">Developers</h1>
+          <p className="lead">
+            <i className="fab fa-connectdevelop" /> Browse and connect with
+            developers
+          </p>
+          <div className="profiles">
+            {profiles.length > 0 ? (
+              displayProfileItem
+            ) : (
+              <h4>No profiles found...</h4>
+            )}
+          </div>
+        </>
+      )}
+    </section>
+  );
+};
 
 Profiles.propTypes = {
-  second: PropTypes.third
-}
+  getProfiles: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+};
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  profile: state.profileReducer,
+});
 
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profiles)
+export default connect(mapStateToProps, { getProfiles })(Profiles);

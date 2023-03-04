@@ -12,7 +12,9 @@ const Header = (props) => {
         <Link to="/"><i class="fas fa-code"></i>{props.appName}</Link>
     </h1>
         <ul>
-            <li><a class="btn" href="profiles.html">Developers</a></li>
+            <li>
+              <Link to= "/profiles">Developers</Link>
+              </li>
             <li>
               <Link to="/register" class="btn" >Register</Link>
             </li>

@@ -2,6 +2,22 @@ import api from "../../utils/api";
 import { GET_PROFILE, PROFILE_ERROR } from "../types";
 import { setAlert } from "./alertAction";
 
+// Get Github repos
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const res = await api.get(`/profile/github/${username}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: NO_REPOS
+    });
+  }
+};
+
 export const getProfiles = () => async (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
 

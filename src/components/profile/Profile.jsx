@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { useParams } from "react-router";
 import { getProfileById } from "../../redux/actions/profileAction";
 import Spinner from "../layouts/Spinner";
-
+import { Link } from 'react-router-dom';
+import ProfileAbout from "./ProfileAbout";
+import ProfileEducation from "./ProfileEducation";
+import ProfileExperience from "./ProfileExperience";
+import ProfileTop from "./ProfileTop";
 
 export const Profile = ({ getProfileById, profile: { profile }, auth }) => {
   const editProfileButton = (
