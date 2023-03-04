@@ -2,43 +2,31 @@ import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { getProfileById } from "../../redux/actions/profileAction";
 import Spinner from "../layouts/Spinner";
-import { Link } from 'react-router-dom';
 import ProfileAbout from "./ProfileAbout";
 import ProfileEducation from "./ProfileEducation";
 import ProfileExperience from "./ProfileExperience";
+import ProfileGitHub from "./ProfileGitHub";
 import ProfileTop from "./ProfileTop";
-
 export const Profile = ({ getProfileById, profile: { profile }, auth }) => {
-  const editProfileButton = (
-    <Link to="/edit-profile" className="btn btn-dark">
-      Edit Profile
-    </Link>
-  );
-  const profileGithubUserName = (
-    <ProfileGithub username={profile.githubusername} />
-  );
-  const displayEducation = (
-    <>
-      {profile.education.map((e) => (
-        <ProfileEducation key={e._id} education={e} />
-      ))}
-    </>
-  );
-  const displayExperience = (
-    <>
-      {profile.experience.map((e) => (
-        <ProfileExperience key={e._id} experience={e} />
-      ))}
-    </>
-  );
   const { id } = useParams();
   // we may collect one or more params from the routing path as per hte req.
   // it will help us to get the userId from the routing path .i.e. it help us to get the :id value.
   useEffect(() => {
     getProfileById(id);
   }, [getProfileById, id]);
+  const editProfileButton = (
+    <Link to="/edit-profile" className="btn btn-dark">
+      Edit Profile
+    </Link>
+  );
+  const profileGithubUserName = "";
+  // (
+  //   <ProfileGitHub username={profile.githubusername} />
+  // );
+
   return (
     <div>
       {" "}
@@ -60,7 +48,11 @@ export const Profile = ({ getProfileById, profile: { profile }, auth }) => {
               <div className="profile-exp bg-white p-2">
                 <h2 className="text-primary">Experience</h2>
                 {profile.experience.length > 0 ? (
-                  displayExperience
+                  <>
+                    {profile.experience.map((e) => (
+                      <ProfileExperience key={e._id} experience={e} />
+                    ))}
+                  </>
                 ) : (
                   <h4>No experience credentials</h4>
                 )}
@@ -69,7 +61,11 @@ export const Profile = ({ getProfileById, profile: { profile }, auth }) => {
               <div className="profile-edu bg-white p-2">
                 <h2 className="text-primary">Education</h2>
                 {profile.education.length > 0 ? (
-                  displayEducation
+                  <>
+                    {profile.education.map((e) => (
+                      <ProfileEducation key={e._id} education={e} />
+                    ))}
+                  </>
                 ) : (
                   <h4>No education credentials</h4>
                 )}
