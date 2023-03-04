@@ -1,19 +1,17 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import { connect } from 'react-redux'
-
-export const Spinner = (props) => {
+import spinner from "../../../assets/img/spinner.gif";
+const Spinner = () => {
   return (
-    <div>Spinner</div>
+    <>
+    <img 
+    src={spinner}
+    style={{ width: "200px",
+    margin: "auto", 
+    display: "block"}}
+    alt="Loading...">
+    </img>
+    </>
   )
 }
 
-Spinner.propTypes = {
-  second: PropTypes.third
-}
-
-const mapStateToProps = (state) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Spinner)
+export default Spinner

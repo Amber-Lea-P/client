@@ -1,81 +1,94 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router";
 import { getProfileById } from "../../redux/actions/profileAction";
+import Spinner from "../layouts/Spinner";
 
-export const Profile = ({getProfileById, profile: { profile }, auth }) => {
+
+export const Profile = ({ getProfileById, profile: { profile }, auth }) => {
+  const editProfileButton = (
+    <Link to="/edit-profile" className="btn btn-dark">
+      Edit Profile
+    </Link>
+  );
+  const profileGithubUserName = (
+    <ProfileGithub username={profile.githubusername} />
+  );
+  const displayEducation = (
+    <>
+      {profile.education.map((e) => (
+        <ProfileEducation key={e._id} education={e} />
+      ))}
+    </>
+  );
+  const displayExperience = (
+    <>
+      {profile.experience.map((e) => (
+        <ProfileExperience key={e._id} experience={e} />
+      ))}
+    </>
+  );
+  const { id } = useParams();
+  // we may collect one or more params from the routing path as per hte req.
+  // it will help us to get the userId from the routing path .i.e. it help us to get the :id value.
+  useEffect(() => {
+    getProfileById(id);
+  }, [getProfileById, id]);
   return (
     <div>
-    <section className="container">
-      {profile === null ? (
-        <Spinner />
-      ) : (
-        <>
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
-          {auth.isAuthenticated &&
-            auth.loading === false &&
-            auth.user._id === profile.user._id && (
-              <Link to="/edit-profile" className="btn btn-dark">
-                Edit Profile
-              </Link>
-            )}
-          <div className="profile-grid my-1">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-            <div className="profile-exp bg-white p-2">
-              <h2 className="text-primary">Experience</h2>
-              {profile.experience.length > 0 ? (
-                <>
-                  {profile.experience.map((experience) => (
-                    <ProfileExperience
-                      key={experience._id}
-                      experience={experience}
-                    />
-                  ))}
-                </>
-              ) : (
-                <h4>No experience credentials</h4>
-              )}
-            </div>
+      {" "}
+      <section className="container">
+        {profile === null ? (
+          <Spinner />
+        ) : (
+          <>
+            <Link to="/profiles" className="btn btn-light">
+              Back To Profiles
+            </Link>
+            {auth.isAuthenticated &&
+              auth.loading === false &&
+              auth.user._id === profile.user._id &&
+              editProfileButton}
+            <div className="profile-grid my-1">
+              <ProfileTop profile={profile} />
+              <ProfileAbout profile={profile} />
+              <div className="profile-exp bg-white p-2">
+                <h2 className="text-primary">Experience</h2>
+                {profile.experience.length > 0 ? (
+                  displayExperience
+                ) : (
+                  <h4>No experience credentials</h4>
+                )}
+              </div>
 
-            <div className="profile-edu bg-white p-2">
-              <h2 className="text-primary">Education</h2>
-              {profile.education.length > 0 ? (
-                <>
-                  {profile.education.map((education) => (
-                    <ProfileEducation
-                      key={education._id}
-                      education={education}
-                    />
-                  ))}
-                </>
-              ) : (
-                <h4>No education credentials</h4>
-              )}
-            </div>
+              <div className="profile-edu bg-white p-2">
+                <h2 className="text-primary">Education</h2>
+                {profile.education.length > 0 ? (
+                  displayEducation
+                ) : (
+                  <h4>No education credentials</h4>
+                )}
+              </div>
 
-            {profile.githubusername && (
-              <ProfileGithub username={profile.githubusername} />
-            )}
-          </div>
-        </>
-      )}
-    </section>
+              {profile.githubusername && profileGithubUserName}
+            </div>
+          </>
+        )}
+      </section>
     </div>
-  )
-}
+  );
+};
 
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (state) => ({
-    profile:state.profileReducer,
-    auth: state.authReducer,
-})
+  profile: state.profileReducer,
+  auth: state.authReducer,
+});
 
-const mapDispatchToProps = { getProfileById }
+const mapDispatchToProps = { getProfileById };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -6,6 +6,7 @@ import Register2 from "../auth/Register2";
 import Alert from "../layouts/Alert";
 import Dashboard from "../dashboard/Dashboard";
 import CreateProfile from "../profile/CreateProfile";
+import Profile from "../profile/Profile";
 
 export const Routers = () => {
   return (
@@ -18,6 +19,7 @@ export const Routers = () => {
         <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
         <Route path="/create-profile" element={<CreateProfile></CreateProfile>}></Route>
         <Route path="/edit-profile" element={<CreateProfile></CreateProfile>}></Route>
+        <Route path="/profile/:id" element={<Profile></Profile>}></Route>
     </Routes>
   </>
   );
