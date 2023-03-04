@@ -2,9 +2,11 @@
 // login
 // loading current user
 import axios from "axios";
-import { REGISTER_SUCCESS, USER_LOADED, USER_ERROR } from "../types";
+import { REGISTER_SUCCESS, USER_LOADED, USER_ERROR, LOGOUT } from "../types";
 import { setAlert } from "./alertAction";
 import api from "../../utils/api";
+
+export const logout = () => ({ type : LOGOUT});
 
 export const loadUser= () => async (dispatch) => {
   try {

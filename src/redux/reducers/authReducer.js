@@ -1,4 +1,4 @@
-import {USER_LOADED,REGISTER_SUCCESS, REGISTER_FAIL  } from "../types";
+import {USER_LOADED,REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT  } from "../types";
 
 // it is used to hold and manipulate the user related states in store. 
 // all auth related operations / user related operations like register, lofin,  loading current user info. etc. 
@@ -13,6 +13,14 @@ export default (state = initialState, action) => {
     // action will share the data that needs to be manipulated and it will share the flag. 
     const {type, payload} = action
   switch (type) {
+  case LOGOUT:
+    localStorage.removeItem("token");
+    return {
+    token : null,
+    isAuthenticated : null,
+    loading : true,
+    user : null
+    };
 
   case USER_LOADED:
     return { ...state, isAuthenticated: true, loading: false, user: payload}

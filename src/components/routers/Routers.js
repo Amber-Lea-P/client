@@ -1,30 +1,46 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Landing from "../layouts/Landing";
 import Login from "../auth/Login";
+import Register from "../auth/Register";
 import Register2 from "../auth/Register2";
-import Alert from "../layouts/Alert";
 import Dashboard from "../dashboard/Dashboard";
+import Alert from "../layouts/Alert";
+
+import Landing from "../layouts/Landing";
 import CreateProfile from "../profile/CreateProfile";
 import Profile from "../profile/Profile";
 import Profiles from "../profiles/Profiles";
+import PrivateRoute from "./PrivateRoute";
 
 export const Routers = () => {
   return (
-  <>
-    <Alert></Alert>
-    <Routes>
+    <>
+      <Alert></Alert>
+      <Routes>
         <Route path="/" element={<Landing></Landing>}></Route>
-        <Route path="/login" element={<Login></Login>}></Route>
-        <Route path="/register" element={<Register2></Register2>}></Route>
-        <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
-        <Route path="/create-profile" element={<CreateProfile></CreateProfile>}></Route>
-        <Route path="/edit-profile" element={<CreateProfile></CreateProfile>}></Route>
-        <Route path="/profile/:id" element={<Profile></Profile>}></Route>
-        <Route path="/profiles" element={<Profiles></Profiles>}></Route>
-    </Routes>
-  </>
+        <Route path="/login" element={<Login></Login>} />
+        <Route path="/register" element={<Register2></Register2>} />
+        <Route
+          path="/dashboard"
+          element={<PrivateRoute component={Dashboard}></PrivateRoute>}
+        ></Route>
+        <Route
+          path="/create-profile"
+          element={<PrivateRoute component={CreateProfile}></PrivateRoute>}
+        />
+        <Route
+          path="/edit-profile"
+          element={<PrivateRoute component={CreateProfile}></PrivateRoute>}
+        />
+        <Route
+          path="/profile/:id"
+          element={<PrivateRoute component={Profile}></PrivateRoute>}
+        />
+        <Route
+          path="/profiles"
+          element={<PrivateRoute component={Profiles}></PrivateRoute>}
+        ></Route>
+      </Routes>
+    </>
   );
 };
-
-

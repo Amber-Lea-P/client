@@ -1,34 +1,66 @@
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../redux/actions/authAction";
 
-import { Link } from 'react-router-dom';
-import React from 'react'
-import Header2 from './Header2';
+const Header = ({ auth: { isAuthenticated }, logout }) => {
+  const authLinks = (
+    <ul>
+      <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
+        <Link to="/posts">Posts</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">
+          <i className="fas fa-user" />{" "}
+          <span className="hide-sm">Dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <a onClick={logout} href="#!">
+          <i className="fas fa-sign-out-alt" />{" "}
+          <span className="hide-sm">Logout</span>
+        </a>
+      </li>
+    </ul>
+  );
 
-const Header = (props) => {
+  const guestLinks = (
+    <ul>
+      <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
+        <Link to="/register">Register</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+    </ul>
+  );
+
   return (
-    <> 
-    <Header2 appName={props.appName}></Header2>
-     <nav class="navbar bg-dark">
-    <h1>
-        <Link to="/"><i class="fas fa-code"></i>{props.appName}</Link>
-    </h1>
-        <ul>
-            <li>
-              <Link to= "/profiles">Developers</Link>
-              </li>
-            <li>
-              <Link to="/register" class="btn" >Register</Link>
-            </li>
-            <li>
-              <Link to="/login" class="btn">Login</Link>
-            </li>
-        </ul>
-    </nav></>
+    <nav className="Header bg-dark">
+      <h1>
+        <Link to="/">
+          <i className="fas fa-code" /> DevConnector
+        </Link>
+      </h1>
+      <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+    </nav>
   );
 };
 
-export default Header
- 
-     
-      
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
+export default connect(mapStateToProps, { logout })(Header);
