@@ -1,6 +1,6 @@
 //from action/post.js final copy
-import api from '../utils/api';
-import { setAlert } from './alert';
+import api from '../../utils/api';
+import { setAlert } from '../actions/alertAction';
 import {
   GET_POSTS,
   POST_ERROR,
@@ -10,7 +10,7 @@ import {
   GET_POST,
   ADD_COMMENT,
   REMOVE_COMMENT
-} from './types';
+} from '../types';
 
 /*
   NOTE: we don't need a config object for axios as the
