@@ -17,7 +17,7 @@ import { loadUser } from './redux/actions/authAction';
 function App() {
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(localStorage.token);
+    //console.log(localStorage.token);
    if(localStorage.token) {
     setAuthToken(localStorage.token);
    }
