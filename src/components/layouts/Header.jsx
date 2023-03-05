@@ -6,7 +6,7 @@ import { logout } from "../../redux/actions/authAction";
 
 const Header = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
-    <ul>
+    <ul class="navbar bg-dark">
       <li>
         <Link to="/profiles">Developers</Link>
       </li>
@@ -31,21 +31,21 @@ const Header = ({ auth: { isAuthenticated }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
+        <Link to="/profiles" className="btn">Developers</Link>
       </li>
       <li>
-        <Link to="/register">Register</Link>
+        <Link to="/register" className="btn">Register</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/login" className="btn">Login</Link>
       </li>
     </ul>
   );
 
   return (
-    <nav className="Header bg-dark">
+    <nav className="navbar bg-dark">
       <h1>
-        <Link to="/">
+        <Link to="/" className="btn"> 
           <i className="fas fa-code" /> DevConnector
         </Link>
       </h1>
