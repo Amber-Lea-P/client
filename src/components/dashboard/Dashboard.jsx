@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import DashboardActions from './DashboardActions';
+import DashboardActions from './DashboardAction';
 import Experience from './DisplayExpDetails';
 import Education from './DisplayEduDetails';
 import { getCurrentProfile, deleteAccount } from '../../redux/actions/profileAction';
