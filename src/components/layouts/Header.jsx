@@ -6,7 +6,7 @@ import { logout } from "../../redux/actions/authAction";
 
 const Header = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
-    <ul class="navbar bg-dark">
+    <ul>
       <li>
         <Link to="/profiles">Developers</Link>
       </li>

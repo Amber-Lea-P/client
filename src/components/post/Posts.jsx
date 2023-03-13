@@ -5,7 +5,7 @@ import PostItem from './PostItem';
 import PostForm from './PostForm';
 import { getPosts } from '../../redux/actions/postAction';
 
-const Posts = ({ getPosts, post: { posts } }) => {
+const Posts = ({ getPosts, post: { post } }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
@@ -18,7 +18,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
       </p>
       <PostForm />
       <div className="posts">
-        {posts.map((post) => (
+        {post.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
       </div>
